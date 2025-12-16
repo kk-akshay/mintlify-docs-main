@@ -1,0 +1,158 @@
+---
+title: "Introduction"
+description: "Bizmo.chat  -  Quick Start Guide"
+---
+
+
+
+
+## What is Bizmo.Chat?
+
+Bizmo.Chat is a user-friendly platform that empowers businesses to create AI-powered chatbots. With its rich feature set, you can train your chatbot using custom documents or website links, customize its UI and behavior, and deploy it across multiple platforms to improve engagement, automate support, and generate leads.
+<img className="block w-full dark:hidden" src="/images/Playground_light.png" />
+<img className="hidden w-full dark:block" src="/images/Playground_dark.png" />
+## Key Features:
+
+* **Dashboard**: Monitor key performance metrics and gain insights into chatbot usage.
+
+* **Playground**: An intuitive interface to personalize the chatbot's design and fine-tune its behavior.
+
+* **Chatflow**: Configure conversation flows to guide users seamlessly through interactions.
+
+* **Train**: Upload custom documents or provide website links to train your chatbot with specific data.
+
+* **Trained Sources**: Manage and view all documents or website links used for training.
+
+* **Leads and Inbox**: Capture user inquiries and manage leads directly from the platform.
+
+* **Analytics**: Monitor chatbot performance, user interactions, and engagement.
+
+* **Collaborators**: Invite and manage team members to work on your chatbot.
+
+* **Billing**: Manage your subscription and payment details.
+
+* **Settings**: Customize platform settings to suit your preferences.
+
+## Quickstart Guide: Setting Up Your Chatbot
+
+Follow these simple steps to get your chatbot up and running on your website in minutes.
+
+<Steps>
+  <Step title="Configure Your Domain">
+    Before embedding your chatbot, you need to specify the domain where it will be used. This ensures your chatbot operates securely and only on authorized websites.
+
+    1. Log in to your **Bizmo.chat** account and navigate to the **Dashboard**.
+
+    2. Under the Setup section, click on Domain  Configuration.
+
+    3. Enter your website’s domain (e.g., example.com) and configure the necessary DNS settings as prompted.
+
+    4. Once configured, you’ll see a checkmark indicating your domain is set up correctly.
+  </Step>
+
+  <Step title="Get Your Embed Script">
+    To add your chatbot to your website, you’ll need to embed a script. This script will load your chatbot seamlessly into your site.
+
+    1. In the Setup section, locate the Get your embed script option.
+
+    2. Copy the provided embed script by clicking the Copy button. The script will look something like this:
+
+    ```javascript
+    <script>
+            const iframe = document.createElement("iframe")
+            iframe.style.colorScheme = 'light';
+            const isMobile = window.innerWidth <= 768;
+            const iframeStyles = (styleString) => {
+            const style = document.createElement("style");
+            style.textContent = styleString;
+            document.head.append(style);
+        }
+            iframeStyles(\`.chat-frame {
+                      position: fixed;
+                      bottom: 20px;
+                      border: none;
+                      right: 20px;
+                      z-index: 1000;
+                  }
+                  .chat-frame-mobile-open {
+                      position: fixed !important;
+                      top: 0 !important;
+                      left: 0 !important;
+                      right: 0 !important;
+                      bottom: 0 !important;
+                      width: 100vw !important;
+                      height: 100vh !important;
+                      max-width: 100% !important;
+                      max-height: 100% !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                      border: none !important;
+                      z-index: 9999 !important;
+                  }
+                  \`);
+            const chatFrameUrl = "https://app.bizmo.chat/chatframe";
+            const targetOrigin = "https://app.bizmo.chat";
+            iframe.src = chatFrameUrl;
+            iframe.classList.add("chat-frame");
+            document.body.append(iframe);
+            iframe.allowTransparency = "true";
+            const sendInitMessage = (currentIsMobile) => {
+                iframe.contentWindow.postMessage({
+                    type: "INIT",
+                    id: "${id}",
+                    domain: window.location.origin,
+                    isMobile: currentIsMobile !== undefined 
+                    ? currentIsMobile : isMobile
+                }, targetOrigin);
+            };
+            iframe.onload = () => {
+                sendInitMessage();
+                
+                setTimeout(() => {
+                    sendInitMessage();
+                }, 1000);
+            };
+            window.addEventListener("resize", () => {
+                const currentIsMobile = window.innerWidth <= 768;
+                if (currentIsMobile !== isMobile) {
+                    sendInitMessage(currentIsMobile);
+                }
+            });
+            window.addEventListener("message", (e) => {
+                if (e.origin !== targetOrigin) return null;
+                try {
+                    let data = JSON.parse(e.data);
+                    if (data.width && data.height) {  
+                        iframe.width = data.width;
+                        iframe.height = data.height;
+                        
+                        if (isMobile && data.isOpen) {
+                            iframe.classList.add("chat-frame-mobile-open");
+                            document.body.style.overflow = "hidden";
+                        } else {
+                            iframe.classList.remove("chat-frame-mobile-open");
+                            document.body.style.overflow = "";
+                        }
+                        sendInitMessage();
+                    }
+                    if (data.requestInit) {
+                        sendInitMessage();
+                    }
+                } catch (err) {
+                    console.error("Error processing message:", err);
+                }
+            });
+        </script>
+    ```
+  </Step>
+
+  <Step title=" Paste this script into the <head> section of your website's HTML code" />
+</Steps>
+
+
+
+## Next Steps
+
+Once the script is added, your chatbot will appear on your website. Customize your chatbot’s appearance, behavior, and responses in the Dashboard to match your needs. If you encounter any issues, refer to our troubleshooting guide or contact our support team.
+
+###

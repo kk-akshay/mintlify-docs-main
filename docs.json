@@ -1,0 +1,59 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Bizmo.Chat",
+  "colors": {
+    "primary": "#000000",
+    "light": "#FFFFFF",
+    "dark": "#000000"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "customization",
+              "training",
+              "chatflow",
+              "trained-sources",
+              "leads",
+              "inbox",
+              "analytics",
+              "accounts",
+              "collaborator",
+              "forms",
+              "billing"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@bizmo.chat"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.bizmo.chat/dashboard"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/bizmo_chat"
+    }
+  }
+}
